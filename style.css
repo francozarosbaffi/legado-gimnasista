@@ -1,0 +1,506 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1B213C;
+    padding: 10px 20px;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    border-bottom: 1px solid #ededed;
+}
+
+
+body {
+    padding-top: 60px; /* Ajusta según la altura del navbar */
+}
+
+h1, h2 {
+    font-family: "bricolage grotesque", sans-serif;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+p, a {
+    font-family: "lato", sans-serif;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 100px;
+    margin-right: 10px;
+}
+
+.social-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-size: 18px;
+    margin-right: 25px;
+    background-color: transparent;
+}
+
+.social-links img {
+    filter: brightness(0) invert(1);
+}
+
+.social-links a:hover{
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+/* Header con imagen de fondo */
+.header-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+    transform: translateX(100%);
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide.prev {
+    transform: translateX(-100%);
+}
+
+.header-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    z-index: 2;
+    padding-top: 65px;
+}
+
+.header-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+.header-content p {
+    opacity: 0.5;
+    font-size: 20px;
+}
+
+.contenido {
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    background-color: #ededed; /* Fallback para imagen */
+    position: relative; /* Necesario para el pseudo-elemento */
+    z-index: 1; /* Asegura que el contenido interno esté sobre el fondo */
+}
+
+/* Capa de fondo con imagen */
+.contenido::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(images/fondopasto.jpg) ; /* Ruta a tu imagen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.9; /* Ajusta la transparencia (0.1 a 0.3 para fondos discretos) */
+    z-index: -1; /* Envía al fondo */
+    pointer-events: none; /* Permite interacción con el contenido */
+    background-attachment: fixed
+}
+
+.seccion {
+    width: 80%;
+    max-width: 600px;
+    background: #1B213C;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.seccion h2 {
+    color: #ededed;
+}
+
+.seccion p {
+    color: #ededed;
+    opacity: 0.6;
+}
+
+.seccion a:hover {
+    color: #1B213C; /* Texto azul al hacer hover */
+    background-color: white; /* Fondo blanco al hacer hover */
+    border-color: #1B213C; /* Mantiene el borde azul */
+}
+
+/* Estilos para el carrusel de actividades */
+.carrusel-actividades {
+    padding: 50px 20px;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+.carrusel-actividades h2 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    color: #1B213C;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.carrusel-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.slide-actividad {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.slide-actividad.active {
+    position: relative;
+    opacity: 1;
+}
+
+.slide-actividad img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.epigrafe {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(27, 33, 60, 0.8);
+    color: white;
+    padding: 12px;
+    font-family: "Lato", sans-serif;
+    font-size: 1.1rem;
+}
+
+.carrusel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.7);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+.carrusel-btn:hover {
+    background: rgba(255,255,255,0.9);
+}
+
+.anterior {
+    left: 15px;
+}
+
+.siguiente {
+    right: 15px;
+}
+
+.indicadores-actividades {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.indicadores-actividades .indicador {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.indicadores-actividades .indicador.active {
+    background: #00AFEF;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .slide-actividad img {
+        height: 300px;
+    }
+    
+    .carrusel-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+}
+
+
+.texto-corto, .texto-completo {
+    overflow: hidden;
+    transition: 
+    max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease;
+}
+
+.texto-corto {
+    max-height: 1000px; /* Valor inicial mayor que cualquier texto corto */
+    opacity: 1;
+}
+
+.texto-completo {
+    max-height: 0;
+    opacity: 0;
+}
+
+.texto-corto.oculto {
+    max-height: 0 !important;
+    opacity: 0;
+}
+
+.texto-completo.visible {
+    max-height: var(--max-height-dinamico); /* Usaremos JS para esto */
+    opacity: 1;
+}
+
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.footer {
+    background: #1B213C;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.redes {
+    display: flex;
+    justify-content: center;
+    gap: 45px;
+    margin-bottom: 15px;
+}
+
+.redes img {
+    width: 40px;
+    transition: transform 0.3s ease;
+    filter: brightness(0) invert(1);
+}
+
+.redes a:hover img {
+    transform: scale(1.2);
+}
+
+.btn-contacto {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background: #00AFEF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+a, .btn-contacto {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-contacto {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px 0;
+    padding: 12px 24px;
+    background: transparent;
+    color: white; /* Azul corporativo */
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    border: 2px solid white; /* Borde sutil */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 2px 4px rgba(0, 175, 239, 0.1);
+}
+
+.btn-contacto:hover {
+    background: #00AFEF;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 175, 239, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-contacto:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 3px rgba(0, 175, 239, 0.3);
+}
+
+/* Versión con ícono (opcional) */
+.btn-contacto::before {
+    content: "✉️";
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+.credito {
+    font-size: 12px;
+    margin-top: 15px;
+    opacity: 0.7;
+}
+
+/* Transición suave para la animación */
+.seccion {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 
+        opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+        transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.seccion.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Pequeño delay escalonado para cada sección */
+.seccion:nth-child(1) { transition-delay: 0.1s; }
+.seccion:nth-child(2) { transition-delay: 0.2s; }
+.seccion:nth-child(3) { transition-delay: 0.3s; }
+.seccion:nth-child(4) { transition-delay: 0.4s; }
+.seccion:nth-child(5) { transition-delay: 0.5s; }
+
+/* Optimización para celulares */
+@media (max-width: 768px) {
+    .header h1 {
+    font-size: 2.5rem;
+    }
+    
+    .header-content h2 {
+    font-size: 1.8rem;
+    }
+    
+    .seccion {
+    width: 95%;
+    }
+    
+    .navbar {
+    flex-direction: column;
+    padding: 10px;
+    }
+    
+    .social-links {
+    margin-top: 10px;
+    }
+    
+    .social-links a {
+    margin: 0 8px;
+    }
+
+    .btn-contacto {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
+
+    .logo img {
+        height: 70px;
+    }
+    
+    .header-content h1 {
+        font-size: 2rem;
+    }
+    
+    .seccion {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .btn-contacto {
+        padding: 10px 15px;
+    }
+
+    .redes {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px), (hover: none) {
+    .contenido::before {
+        background-attachment: scroll; /* Móviles y dispositivos táctiles */
+        background-size: cover; /* Asegura cobertura total */
+        opacity: 0.9; /* Mayor transparencia para mejor contraste */
+    }
+}
