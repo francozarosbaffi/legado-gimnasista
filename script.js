@@ -69,26 +69,24 @@ document.querySelectorAll('.btn-vermas').forEach(button => {
         const textoCorto = seccion.querySelector('.texto-corto');
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-    if (isExpanded) {
-        // Collapse
-        textoCompleto.classList.remove('visible');
-        textoCorto.classList.remove('oculto');
-        button.setAttribute('aria-expanded', 'false');
-        button.textContent = 'Ver más';
-    } else {
-        // Expand - primero calcula altura real
-        textoCompleto.style.display = 'block'; // Temporal para medir
-        const alturaReal = textoCompleto.scrollHeight + 'px';
-        textoCompleto.style.display = '';
-        
-        //  altura dinámica
-        textoCompleto.style.setProperty('--max-height-dinamico', alturaReal);
-        
-        // Activa la animación
-        textoCorto.classList.add('oculto');
-        textoCompleto.classList.add('visible');
-        button.setAttribute('aria-expanded', 'true');
-        button.textContent = 'Ver menos';
+        if (isExpanded) {
+            // Collapse
+            textoCompleto.classList.remove('visible');
+            textoCorto.classList.remove('oculto');
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            // Expand - primero calcula altura real
+            textoCompleto.style.display = 'block'; // Temporal para medir
+            const alturaReal = textoCompleto.scrollHeight + 'px';
+            textoCompleto.style.display = '';
+            
+            // altura dinámica
+            textoCompleto.style.setProperty('--max-height-dinamico', alturaReal);
+            
+            // Activa la animación
+            textoCorto.classList.add('oculto');
+            textoCompleto.classList.add('visible');
+            button.setAttribute('aria-expanded', 'true');
         }
     });
 });
